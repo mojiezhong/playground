@@ -1,0 +1,47 @@
+
+
+
+def anything():
+
+    s3 = boto3.resource("s3")
+
+    ec2 = boto3.resource("ec2")
+
+    #for i in s3.buckets.all():
+    #    print i
+
+    dbc = boto3.client('rds')
+
+    print dbc
+
+    res = dbc.describe_account_attributes()
+
+    #print res
+
+
+    print "-------------------------------------------------------------------------------------------------------------<<<<<<<<<<<<<<<<<<<"
+    #boto3.client('rds').delete_db_instance(DBInstanceIdentifier='dev-jiezhong-restore', FinalDBSnapshotIdentifier='dev-jiezhong-FinalDBSnapshotIdentifier')
+
+    dbclient = boto3.client('rds')
+
+    try:
+        dbclient.delete_db_instance(DBInstanceIdentifier='dev-jiezhong-restore5', SkipFinalSnapshot=True)
+
+    except botocore.exceptions.ClientError as err:
+        print "Can't find instance to delete, that is fine, continue to restore", err
+
+
+    while True:
+        try:
+            boto3.client('rds').restore_db_instance_from_db_snapshot(DBInstanceIdentifier='dev-jiezhong-restore5',
+                                                         DBSnapshotIdentifier="dev-jiezhong-backup-snap2",
+                                                         DBInstanceClass="db.t2.micro",
+                                                         AvailabilityZone="us-east-1e",
+                                                         PubliclyAccessible=False,
+                                                         StorageType="standard",
+                                                         DBSubnetGroupName="default-vpc-c799b5a3")
+        except botocore.exceptions.ClientError as err :
+            print "Get error when restore, try again in 5 seconds", err, type(err)
+            time.sleep(5)
+            continue
+        break
