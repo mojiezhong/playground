@@ -1,9 +1,14 @@
 
+#!/usr/bin/env python
 
+from __future__ import print_function
+
+import os
+
+# limit in codecommit is 2252341248.
 
 
 import datetime
-import os
 
 class Stopwatch(object):
     """A simple timer class"""
@@ -41,13 +46,20 @@ class Stopwatch(object):
 
 s1 = Stopwatch()
 s1.start()
+s = ""
+# for i in range (1, 10000009):
+#     s += "100000000010000000001000000000100000000010000000001000000000100000000010000000001000000000100000000010000000001000000000,,"
+
+
+p = os.path.expanduser("~/temp/b12.txt")
+p = os.path.expandvars(p)
+print (p)
+
+f = open("/Users/jiezhong.mo/temp/bigfile.txt", "w")
+print(s, file=f)
+
+f.close()
+
+# print(s)
 
 print (s1.stop())
-
-
-your_path = "/Users/jiezhong.mo/repos/data-science/"
-for path, dirs, files in os.walk(your_path):
-    print(path)
-    print(dirs)
-    print(files)
-    print("----------------------------------------------------------------")
