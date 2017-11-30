@@ -23,11 +23,11 @@ def get_instances():
         labels = ""
         for instance in running_instances:
             if len(targets) == 0:
-                targets = '"{}"'.format(instance.private_ip_address)
-                labels = '"{}"'.format(instance.public_dns_name)
+                targets = '"{}:9990"'.format(instance.private_ip_address)
+                labels = '"name":"{}"'.format(instance.public_dns_name)
             else:
-                targets = targets + ',"{}"'.format(instance.private_ip_address)
-                labels = labels + ',"{}"'.format(instance.public_dns_name)
+                targets = targets + ',"{}:9990"'.format(instance.private_ip_address)
+                labels = labels + ',"name":"{}"'.format(instance.public_dns_name)
             #print(instance.id, instance.public_dns_name, instance.private_ip_address)
 
         content = """
