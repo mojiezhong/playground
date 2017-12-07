@@ -1,15 +1,22 @@
 [
-{
-    "targets":["172.25.21.31:9990"],
-    "labels": {
-      "name":"staging-routing-ami-9b6302e1-20171205223849Z"
+    {
+        "targets":["172.25.23.132:9990"],
+        "labels": {
+          "name":"staging-routing-ami-9b6302e1-20171205223849Z","dns":"ec2-34-204-61-155.compute-1.amazonaws.com","instanceid":"i-00e9ad594d32dfb04"
+        }
     }
-}
-            
-,{
-    "targets":["172.23.43.63:9990"],
-    "labels": {
-      "name":"integration-routing-ami-9b6302e1-20171205223148Z"
-    }
-  }
-]
+                
+    ,{
+        "targets":["172.25.21.31:9990"],
+        "labels": {
+          "name":"staging-routing-ami-9b6302e1-20171205223849Z","dns":"ec2-54-210-248-170.compute-1.amazonaws.com","instanceid":"i-0f196d97147d9f11d"
+        }
+      }
+    
+    ,{
+        "targets":["172.23.43.63:9990"],
+        "labels": {
+          "name":"integration-routing-ami-9b6302e1-20171205223148Z","dns":"ec2-52-86-74-62.compute-1.amazonaws.com","instanceid":"i-0820cf753085b8f81"
+        }
+      }
+    ]

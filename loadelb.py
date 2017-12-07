@@ -3,6 +3,7 @@
 
 from collections import defaultdict
 import boto3
+import time
 
 ec2 = boto3.resource('ec2', region_name='us-east-1')
 
@@ -22,34 +23,30 @@ def get_instances():
         running_instances = ec2.instances.filter(InstanceIds=instance_ids)
 
 
-        targets = ""
-        labels = ""
+
         for instance in running_instances:
-            if len(targets) == 0:
-                targets = '"{}:9990"'.format(instance.private_ip_address)
-                labels = '"name":"{}"'.format(get_name(instance))
-            else:
-                targets = targets + ',"{}:9990"'.format(instance.private_ip_address)
-                labels = labels + ',"name":"{}"'.format(get_name(instance))
+            targets = '"{}:9990"'.format(instance.private_ip_address)
+            labels = '"name":"{}","dns":"{}","instanceid":"{}"'.format(get_name(instance), instance.public_dns_name, instance._id)
+
             #print(instance.id, instance.public_dns_name, instance.private_ip_address)
-        if content == "[" :
-            content += """
-{{
-    "targets":[{}],
-    "labels": {{
-      {}
+            if content == "[" :
+                content += """
+    {{
+        "targets":[{}],
+        "labels": {{
+          {}
+        }}
     }}
-}}
-            """.format(targets, labels)
-        else:
-            content += """
-,{{
-    "targets":[{}],
-    "labels": {{
-      {}
-    }}
-  }}
-""".format(targets, labels)
+                """.format(targets, labels)
+            else:
+                content += """
+    ,{{
+        "targets":[{}],
+        "labels": {{
+          {}
+        }}
+      }}
+    """.format(targets, labels)
 
     content += "]"
 
@@ -67,4 +64,13 @@ def get_name(instance):
 
 
 if __name__ == '__main__':
-    get_instances()
+    i = 0
+    while True:
+        i += 1
+        print ("Pulling ......", i)
+        try:
+            get_instances()
+        except:
+            print ("Sleep ext 50s Got error:", sys.exc_info()[0])
+            time.sleep(50)
+        time.sleep(5)
