@@ -4,49 +4,69 @@
 from collections import defaultdict
 import boto3
 import time
+import sys
 
-ec2 = boto3.resource('ec2', region_name='us-east-1')
 
-loadbalances = ['staging-routing','integration-routing']
+loadbalances = [
+    { 'profile':'ofpdev',
+      'balance':'staging-routing',
+     } ,
+     {'profile':'ofpdev',
+      'balance':'integration-routing',
+      },
+      {'profile':'prod',
+      'balance':'prod-auth',
+      },
+      {'profile':'prod',
+      'balance':'prod-routing',
+      },
+    ]
 
 def get_instances():
-    client = boto3.client('elb', region_name='us-east-1')
-    resp = client.describe_load_balancers(LoadBalancerNames=loadbalances)
-
-
     content = "["
-    for lb in resp['LoadBalancerDescriptions']:
-        instance_ids = [i["InstanceId"] for i in lb['Instances']]
+    for lb in loadbalances:
+
+        session = boto3.session.Session(profile_name=lb['profile'], region_name='us-east-1')
+        client = session.client('elb')
+
+        ec2 = session.resource('ec2')
+
+        resp = client.describe_load_balancers(LoadBalancerNames=[lb['balance']])
 
 
-        #running_instances = ec2.instances.filter(Filters=[{'Name':'InstanceId', 'Values':instance_ids}])
-        running_instances = ec2.instances.filter(InstanceIds=instance_ids)
+
+        for lb in resp['LoadBalancerDescriptions']:
+            instance_ids = [i["InstanceId"] for i in lb['Instances']]
+
+
+            #running_instances = ec2.instances.filter(Filters=[{'Name':'InstanceId', 'Values':instance_ids}])
+            running_instances = ec2.instances.filter(InstanceIds=instance_ids)
 
 
 
-        for instance in running_instances:
-            targets = '"{}:9990"'.format(instance.private_ip_address)
-            labels = '"name":"{}","dns":"{}","instanceid":"{}"'.format(get_name(instance), instance.public_dns_name, instance._id)
+            for instance in running_instances:
+                targets = '"{}:9990"'.format(instance.private_ip_address)
+                labels = '"name":"{}","dns":"{}","instanceid":"{}"'.format(get_name(instance), instance.public_dns_name, instance._id)
 
-            #print(instance.id, instance.public_dns_name, instance.private_ip_address)
-            if content == "[" :
-                content += """
-    {{
-        "targets":[{}],
-        "labels": {{
-          {}
-        }}
-    }}
-                """.format(targets, labels)
-            else:
-                content += """
-    ,{{
-        "targets":[{}],
-        "labels": {{
-          {}
-        }}
-      }}
-    """.format(targets, labels)
+                #print(instance.id, instance.public_dns_name, instance.private_ip_address)
+                if content == "[" :
+                        content += """
+            {{
+                "targets":[{}],
+                "labels": {{
+                  {}
+                }}
+            }}
+                        """.format(targets, labels)
+                else:
+                        content += """
+            ,{{
+                "targets":[{}],
+                "labels": {{
+                  {}
+                }}
+              }}
+            """.format(targets, labels)
 
     content += "]"
 
@@ -70,7 +90,7 @@ if __name__ == '__main__':
         print ("Pulling ......", i)
         try:
             get_instances()
-        except:
-            print ("Sleep ext 50s Got error:", sys.exc_info()[0])
-            time.sleep(50)
-        time.sleep(5)
+        except Exception as ex:
+            print ("Sleep ext 50s Got error ", ex)
+            time.sleep(20)
+        time.sleep(20)

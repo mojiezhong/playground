@@ -8,6 +8,15 @@ import m1
 import tempfile
 
 print "ello"
+
+
+a = {'a':1}
+b = {'a':2,
+     'b':3}
+
+a.update(b)
+
+print(a)
 #
 # m1.show()
 #
@@ -95,14 +104,17 @@ print "ello"
 # '''.format(2,53)
 # print (x)
 
+#
+# y = "1,2 ,  3 ,  4acxs "
+# print (y)
+# print (list(y))
+# print (y.split(","))
+#
+# yy = ["1,2,3", "w,s,x"]
+#
+# print (yy)
 
-y = "1,2 ,  3 ,  4acxs "
-print (y)
-print (list(y))
-print (y.split(","))
 
-yy = ["1,2,3", "w,s,x"]
 
-print (yy)
 #print (yy.split(","))
 

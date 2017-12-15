@@ -1,22 +1,120 @@
 [
-    {
-        "targets":["172.25.23.132:9990"],
-        "labels": {
-          "name":"staging-routing-ami-9b6302e1-20171205223849Z","dns":"ec2-34-204-61-155.compute-1.amazonaws.com","instanceid":"i-00e9ad594d32dfb04"
-        }
-    }
-                
-    ,{
-        "targets":["172.25.21.31:9990"],
-        "labels": {
-          "name":"staging-routing-ami-9b6302e1-20171205223849Z","dns":"ec2-54-210-248-170.compute-1.amazonaws.com","instanceid":"i-0f196d97147d9f11d"
-        }
-      }
-    
-    ,{
-        "targets":["172.23.43.63:9990"],
-        "labels": {
-          "name":"integration-routing-ami-9b6302e1-20171205223148Z","dns":"ec2-52-86-74-62.compute-1.amazonaws.com","instanceid":"i-0820cf753085b8f81"
-        }
-      }
-    ]
+            {
+                "targets":["172.25.23.86:9990"],
+                "labels": {
+                  "name":"staging-routing-ami-52ed8728-20171212220813Z","dns":"ec2-54-236-33-136.compute-1.amazonaws.com","instanceid":"i-03f73553a041f0e8e"
+                }
+            }
+                        
+            ,{
+                "targets":["172.25.22.222:9990"],
+                "labels": {
+                  "name":"staging-routing-ami-52ed8728-20171212220813Z","dns":"ec2-34-238-124-193.compute-1.amazonaws.com","instanceid":"i-0589032b01cb86436"
+                }
+              }
+            
+            ,{
+                "targets":["172.23.41.70:9990"],
+                "labels": {
+                  "name":"integration-routing-ami-3c91fb46-20171212212457Z","dns":"ec2-52-90-69-17.compute-1.amazonaws.com","instanceid":"i-04eb9bb1a64d44262"
+                }
+              }
+            
+            ,{
+                "targets":["172.16.41.220:9990"],
+                "labels": {
+                  "name":"prod-auth-09626","dns":"ec2-54-174-209-240.compute-1.amazonaws.com","instanceid":"i-0fc4128ade9906232"
+                }
+              }
+            
+            ,{
+                "targets":["172.16.41.111:9990"],
+                "labels": {
+                  "name":"prod-auth-09626","dns":"ec2-54-173-207-245.compute-1.amazonaws.com","instanceid":"i-060a1438a7702b1eb"
+                }
+              }
+            
+            ,{
+                "targets":["172.16.43.254:9990"],
+                "labels": {
+                  "name":"prod-auth-09626","dns":"ec2-52-205-186-72.compute-1.amazonaws.com","instanceid":"i-0f0ed849f5347f088"
+                }
+              }
+            
+            ,{
+                "targets":["172.16.43.116:9990"],
+                "labels": {
+                  "name":"prod-auth-09626","dns":"ec2-35-153-160-105.compute-1.amazonaws.com","instanceid":"i-0ec514709189c1490"
+                }
+              }
+            
+            ,{
+                "targets":["172.16.42.71:9990"],
+                "labels": {
+                  "name":"prod-auth-09626","dns":"ec2-54-208-54-25.compute-1.amazonaws.com","instanceid":"i-03db41f6abe023b90"
+                }
+              }
+            
+            ,{
+                "targets":["172.16.42.68:9990"],
+                "labels": {
+                  "name":"prod-auth-09626","dns":"ec2-34-228-143-217.compute-1.amazonaws.com","instanceid":"i-0cb46c3550a5a5003"
+                }
+              }
+            
+            ,{
+                "targets":["172.16.21.34:9990"],
+                "labels": {
+                  "name":"prod-routing-201710271005","dns":"ec2-52-91-124-108.compute-1.amazonaws.com","instanceid":"i-0df7d6e077c139d23"
+                }
+              }
+            
+            ,{
+                "targets":["172.16.21.18:9990"],
+                "labels": {
+                  "name":"prod-routing-201710271005","dns":"ec2-52-204-31-16.compute-1.amazonaws.com","instanceid":"i-02bc41d0b246370c9"
+                }
+              }
+            
+            ,{
+                "targets":["172.16.22.34:9990"],
+                "labels": {
+                  "name":"prod-routing-201710271005","dns":"ec2-34-230-84-237.compute-1.amazonaws.com","instanceid":"i-0dd7955e49cb4b2d4"
+                }
+              }
+            
+            ,{
+                "targets":["172.16.21.121:9990"],
+                "labels": {
+                  "name":"prod-routing-201710271005","dns":"ec2-52-86-28-253.compute-1.amazonaws.com","instanceid":"i-0365546a18ff8c627"
+                }
+              }
+            
+            ,{
+                "targets":["172.16.23.70:9990"],
+                "labels": {
+                  "name":"prod-routing-201710271005","dns":"ec2-52-90-215-206.compute-1.amazonaws.com","instanceid":"i-026fc120373f1aa1b"
+                }
+              }
+            
+            ,{
+                "targets":["172.16.23.213:9990"],
+                "labels": {
+                  "name":"prod-routing-201710271005","dns":"ec2-52-87-188-88.compute-1.amazonaws.com","instanceid":"i-0d8ec5d8c7fe6e5bf"
+                }
+              }
+            
+            ,{
+                "targets":["172.16.22.104:9990"],
+                "labels": {
+                  "name":"prod-routing-201710271005","dns":"ec2-34-228-75-216.compute-1.amazonaws.com","instanceid":"i-0461e519a4ee9b704"
+                }
+              }
+            
+            ,{
+                "targets":["172.16.22.45:9990"],
+                "labels": {
+                  "name":"prod-routing-201710271005","dns":"ec2-54-198-129-36.compute-1.amazonaws.com","instanceid":"i-01efbae8f3d81d11a"
+                }
+              }
+            ]
